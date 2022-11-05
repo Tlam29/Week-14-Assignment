@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../node_modules/jquery/dist/jquery'
-import MovieList from './components/MovieList'
-import MovieListHeading from './components/MovieListHeading';
-import Search from './components/Search';
+import StarRating from './components/StarRating';
 import './App.css';
+import MovieList from './components/MovieList';
+import MovieListHeading from './components/MovieListHeading';
+import SearchBox from './components/SearchBox';
+import AddFavorite from './components/AddtoFavorites';
 
-const App = () => {
-  const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState('')
-  
-  const getMovie = async(searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=fa3f61f4`
+const App = () =>{
+  const [movies,setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const getMovieRequest = async () => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=fa3f61f4`;
 
     const response = await fetch(url);
-    const responseJson = await response.json;
+    const responseJson = await response.json()
 
     if(responseJson.Search){
-      setMovies(responseJson.Search);
+      setMovies(responseJson.Search)
     }
-  }
-
-    useEffect( () =>{
-      getMovie(searchValue);
-    }, [searchValue])
-  
-
-	 
-	return (
-		<div className='container-fluid'>
-			<div className='row'>
-        <MovieListHeading heading='Movies'/>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
-      <div className='row'>
-        <MovieList movies = {movies} />
+  };
+  useEffect(() =>{
+    getMovieRequest();
+  })
+  return(
+    <div className='container-fluid movie-app'>
+      <div className='row d-flex align-items-center mt-4 mb-4'>
+        <MovieList heading='Movies' />
+        <SearchBox searchValue = {searchValue} setSearchValue = {setSearchValue} />
       </div>
-		</div>
-	);
-};
-
+      <div className='row'>
+        <MovieList key={movies.imdbID} movies={movies} favorite={AddFavorite} />
+      </div>
+    </div>
+  )
+}
 export default App;
