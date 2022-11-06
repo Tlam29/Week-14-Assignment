@@ -1,15 +1,26 @@
 import React from "react";
-import AddFavorite from "./AddtoFavorites";
+import Review from "./Review";
+import StarRating from "./StarRating";
+import ReviewList from "./ReviewList";
+
+
+
 
 const MovieList = (props) =>{
     return(
-        <>
+        <>  <div>
             {props.movies?.map((movies, index) => (
-                <div className="image-container d-flex justify-content-start m-5">
+                <div className="image-container d-flex justify-content-start m-40">
                     <img src={movies.Poster} alt='movie'></img>
-                    <div className="overlay d-flex align-items-center justify-content-center"><AddFavorite/></div>
+                    <br></br>
+                    <StarRating />
+                    <br></br>
+                    <ReviewList />
+                    
                 </div>
+                
             ))}
+            </div>
         </>
     )
 }

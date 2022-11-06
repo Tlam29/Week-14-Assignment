@@ -35,7 +35,7 @@ input[type='radio']{
   transition: color 200ms;
 }
 body{
-  background: #141414;
+  background: #141414 !important;
   color: #ffff;
 }
 .movie-app > .row{
@@ -47,10 +47,7 @@ body{
   position: relative;
   transition: tranform 0.2s;
 }
-.image-container:hover{
-  cursor: pointer;
-  transform: scale(1.1);
-}
+
 .image-container:hover .overlay{
   opacity: 1;
 }

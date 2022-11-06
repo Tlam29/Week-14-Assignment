@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import StarRating from './components/StarRating';
 import './App.css';
 import MovieList from './components/MovieList';
-import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
-import AddFavorite from './components/AddtoFavorites';
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+
+
 
 const App = () =>{
+  //Updating the state
   const [movies,setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  //Using movie api to get movies 
   const getMovieRequest = async () => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=fa3f61f4`;
 
@@ -29,7 +32,7 @@ const App = () =>{
         <SearchBox searchValue = {searchValue} setSearchValue = {setSearchValue} />
       </div>
       <div className='row'>
-        <MovieList key={movies.imdbID} movies={movies} favorite={AddFavorite} />
+        <MovieList key={movies.imdbID} movies={movies} />
       </div>
     </div>
   )
